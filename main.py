@@ -14,7 +14,8 @@ def main():
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
-
+    score = 0
+    life_count = 3
     updatable = pygame.sprite.Group()           #group for updatable thing
     drawable = pygame.sprite.Group()            #group for drawable things
     asteroids = pygame.sprite.Group()           #group for asteroids
@@ -38,9 +39,14 @@ def main():
                 if shot.check_collision(asteroid) == True:
                     shot.kill()
                     asteroid.split()
+                    score += 1
             if player1.check_collision(asteroid) == True:
-                print("Game over!")
-                sys.exit(0)
+                life_count -= 1
+                player1.position.x = SCREEN_WIDTH / 2
+                player1.position.y = SCREEN_HEIGHT / 2
+                if life_count == 0:
+                    print(f"Game over! Your Score was {score}")
+                    sys.exit(0)
         pygame.display.flip()                   #refreshes display
         game_clock.tick(60)                     #caps game at 60fps
         dt = game_clock.get_time() / 1000       #returns time between ticks in seconds to dt
