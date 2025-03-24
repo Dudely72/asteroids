@@ -22,7 +22,7 @@ class Player(CircleShape):          #player looks like triangle, actually a circ
         return [a, b, c]
 
     def draw(self, screen):         #draws player
-        pygame.draw.polygon(screen, "white", self.triangle(), 2)
+        pygame.draw.polygon(screen, "green", self.triangle(), 2)
 
     def rotate(self, dt):           #rotate formula
         self.rotation += (PLAYER_TURN_SPEED * dt)
